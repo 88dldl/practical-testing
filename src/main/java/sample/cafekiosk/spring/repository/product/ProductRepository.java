@@ -1,8 +1,8 @@
-package sample.cafekiosk.spring.repository;
+package sample.cafekiosk.spring.repository.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sample.cafekiosk.spring.domain.Product;
-import sample.cafekiosk.spring.domain.ProductSellingType;
+import sample.cafekiosk.spring.domain.product.Product;
+import sample.cafekiosk.spring.domain.product.ProductSellingType;
 
 import java.util.List;
 
