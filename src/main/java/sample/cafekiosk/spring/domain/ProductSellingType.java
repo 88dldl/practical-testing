@@ -3,6 +3,8 @@ package sample.cafekiosk.spring.domain;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @RequiredArgsConstructor
 public enum ProductSellingType {
@@ -11,4 +13,8 @@ public enum ProductSellingType {
     STOP_SELLING("판매 중지");
 
     private final String text;
+
+    public static List<ProductSellingType> forDisplay() {
+        return List.of(SELLING, HOLD);
+    }
 }
