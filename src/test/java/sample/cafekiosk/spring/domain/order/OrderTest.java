@@ -44,6 +44,23 @@ class OrderTest {
         assertThat(order.getStatus()).isEqualByComparingTo(OrderStatus.INIT);
     }
 
+    @DisplayName("주문 생성시 등록시간을 기록한다.")
+    @Test
+    void registeredDateTime() {
+        //given
+        List<Product> products = List.of(createProduct("001", 4000),
+                createProduct("002", 1000),
+                createProduct("003", 2000)
+        );
+        LocalDateTime registeredDateTime = LocalDateTime.now();
+
+        //when
+        Order order = Order.create(products, registeredDateTime);
+
+        //then
+        assertThat(order.getRegisteredDateTime()).isEqualTo(registeredDateTime);
+    }
+
     private Product createProduct(String productNumber, int price) {
         return Product.builder()
                 .productNumber(productNumber)
