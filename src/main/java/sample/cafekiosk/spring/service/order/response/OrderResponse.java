@@ -10,12 +10,14 @@ import java.util.List;
 @Getter
 public class OrderResponse {
     private Long id;
+    private int totalPrice;
     private LocalDateTime registeredDateTime;
     private List<ProductResponse> products;
 
     @Builder
-    private OrderResponse(Long id, LocalDateTime registeredDateTime, List<ProductResponse> products) {
+    private OrderResponse(Long id, int totalPrice, LocalDateTime registeredDateTime, List<ProductResponse> products) {
         this.id = id;
+        this.totalPrice = totalPrice;
         this.registeredDateTime = registeredDateTime;
         this.products = products;
     }
