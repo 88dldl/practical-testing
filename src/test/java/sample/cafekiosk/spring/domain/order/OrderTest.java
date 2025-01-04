@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import sample.cafekiosk.spring.domain.product.Product;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +22,7 @@ class OrderTest {
         );
 
         //when
-        Order order = Order.create(products);
+        Order order = Order.create(products, LocalDateTime.now());
 
         //then
         assertThat(order.getTotalPrice()).isEqualTo(7000);
@@ -37,7 +38,7 @@ class OrderTest {
         );
 
         //when
-        Order order = Order.create(products);
+        Order order = Order.create(products, LocalDateTime.now());
 
         //then
         assertThat(order.getStatus()).isEqualByComparingTo(OrderStatus.INIT);
