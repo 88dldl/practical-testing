@@ -29,6 +29,7 @@ public class Order extends BaseEntity {
     private Long id;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    private int totalPrice;
     private LocalDateTime registeredDateTime;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
