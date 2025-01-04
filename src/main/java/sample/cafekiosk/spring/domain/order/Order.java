@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sample.cafekiosk.spring.domain.BaseEntity;
 import sample.cafekiosk.spring.domain.orderProduct.OrderProduct;
+import sample.cafekiosk.spring.domain.product.Product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -34,4 +35,19 @@ public class Order extends BaseEntity {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> orderProducts = new ArrayList<>();
+
+    public Order(List<Product> products) {
+        this.status = OrderStatus.INIT;
+        this.totalPrice = calculateTotalPrice(products);
+        this.registeredDateTime = LocalDateTime.now();
+    }
+
+    private int calculateTotalPrice(List<Product> products) {
+        return products.stream().mapToInt(Product::getPrice).sum();
+    }
+
+    public static Order create(List<Product> products) {
+        return new Order(products);
+    }
+
 }
