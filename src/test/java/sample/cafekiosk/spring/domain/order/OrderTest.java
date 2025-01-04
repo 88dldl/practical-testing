@@ -27,6 +27,22 @@ class OrderTest {
         assertThat(order.getTotalPrice()).isEqualTo(7000);
     }
 
+    @DisplayName("주문 생성시 주문 초기 상태는 INIT이다.")
+    @Test
+    void init() {
+        //given
+        List<Product> products = List.of(createProduct("001", 4000),
+                createProduct("002", 1000),
+                createProduct("003", 2000)
+        );
+
+        //when
+        Order order = Order.create(products);
+
+        //then
+        assertThat(order.getStatus()).isEqualByComparingTo(OrderStatus.INIT);
+    }
+
     private Product createProduct(String productNumber, int price) {
         return Product.builder()
                 .productNumber(productNumber)
