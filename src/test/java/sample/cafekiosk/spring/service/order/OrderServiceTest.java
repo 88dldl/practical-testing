@@ -63,6 +63,38 @@ class OrderServiceTest {
 
     }
 
+    @DisplayName("중복되는 상품번호 리스트로 주문을 생성할 수 있다.")
+    @Test
+    void createOrderWithDuplicateProductNumners() {
+        //given
+        Product product1 = createProduct(HANDMADE, "001", 1000);
+        productRepository.saveAll(List.of(product1));
+
+        OrderCreateRequest request = OrderCreateRequest.builder()
+                .productNumbers(List.of("001", "001"))
+                .build();
+
+        //when
+        LocalDateTime registerDateTime = LocalDateTime.now();
+        OrderResponse response = orderService.createOrder(request, registerDateTime);
+
+        //then
+        assertThat(response.getId()).isNotNull();
+
+        // 주문 검증
+        assertThat(response)
+                .extracting("registeredDateTime", "totalPrice")
+                .contains(registerDateTime, 2000);
+
+        // 주문 안 상품들 검증
+        assertThat(response.getProducts())
+                .extracting("productNumber", "price")
+                .containsExactlyInAnyOrder(
+                        tuple("001", 1000),
+                        tuple("001", 1000)
+                );
+    }
+
     private Product createProduct(ProductType type, String productNumber, int price) {
         return Product.builder()
                 .productNumber(productNumber)
