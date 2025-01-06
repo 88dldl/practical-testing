@@ -37,12 +37,12 @@ class OrderServiceTest {
         productRepository.saveAll(List.of(product1, product2, product3));
 
         OrderCreateRequest request = OrderCreateRequest.builder()
-                .productNumbers(List.of("001","002"))
+                .productNumbers(List.of("001", "002"))
                 .build();
 
         //when
-        LocalDateTime registerDateTime= LocalDateTime.now();
-        OrderResponse response = orderService.createOrder(request,registerDateTime);
+        LocalDateTime registerDateTime = LocalDateTime.now();
+        OrderResponse response = orderService.createOrder(request, registerDateTime);
 
         //then
         // id는 얼마인지 중요하지 않고 있으면 된다,
@@ -50,15 +50,15 @@ class OrderServiceTest {
 
         // 주문 검증
         assertThat(response)
-                .extracting("registeredDateTime","totalPrice")
-                .contains(registerDateTime,3000);
+                .extracting("registeredDateTime", "totalPrice")
+                .contains(registerDateTime, 3000);
 
         // 주문 안 상품들 검증
         assertThat(response.getProducts())
-                .extracting("productNumber","price")
+                .extracting("productNumber", "price")
                 .containsExactlyInAnyOrder(
-                        tuple("001",1000),
-                        tuple("002",2000)
+                        tuple("001", 1000),
+                        tuple("002", 2000)
                 );
 
     }
