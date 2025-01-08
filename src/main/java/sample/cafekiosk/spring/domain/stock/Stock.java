@@ -25,4 +25,11 @@ public class Stock extends BaseEntity {
         this.productNumber = productNumber;
         this.quantity = quantity;
     }
+
+    public static Stock create(String productNumber, int quantity) {
+        return Stock.builder()
+                .productNumber(productNumber)
+                .quantity(quantity)
+                .build();
+    }
 }
