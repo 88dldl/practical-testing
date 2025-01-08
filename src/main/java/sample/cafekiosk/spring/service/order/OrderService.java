@@ -37,6 +37,10 @@ public class OrderService {
         // 재고 엔티티 조회
         List<Stock> stocks = stockRepository.findAllByProductNumberIn(stockProductNumbers);
 
+        // 상품별 개수 counting
+        Map<String, Long> productCountingMap = stockProductNumbers.stream()
+                .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
+
         Order order = Order.create(products, registeredDateTime);
         Order savedOrder = orderRepository.save(order);
 
