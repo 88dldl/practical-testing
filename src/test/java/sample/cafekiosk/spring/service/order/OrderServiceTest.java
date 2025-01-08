@@ -1,6 +1,6 @@
 package sample.cafekiosk.spring.service.order;
 
-import org.junit.jupiter.api.AfterEach;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,7 @@ import static sample.cafekiosk.spring.domain.product.ProductType.BOTTLE;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
 @ActiveProfiles("test")
+@Transactional
 @SpringBootTest
 class OrderServiceTest {
     @Autowired
@@ -40,12 +41,12 @@ class OrderServiceTest {
     @Autowired
     private OrderService orderService;
 
-    @AfterEach
-    void tearDown() {
-        orderProductRepository.deleteAllInBatch();
-        productRepository.deleteAllInBatch();
-        orderRepository.deleteAllInBatch();
-    }
+//    @AfterEach
+//    void tearDown() {
+//        orderProductRepository.deleteAllInBatch();
+//        productRepository.deleteAllInBatch();
+//        orderRepository.deleteAllInBatch();
+//    }
 
     @DisplayName("주문번호 리스트를 받아 주문을 생성한다.")
     @Test
@@ -60,8 +61,9 @@ class OrderServiceTest {
                 .productNumbers(List.of("001", "002"))
                 .build();
 
-        //when
         LocalDateTime registerDateTime = LocalDateTime.now();
+
+        //when
         OrderResponse response = orderService.createOrder(request, registerDateTime);
 
         //then
@@ -94,8 +96,9 @@ class OrderServiceTest {
                 .productNumbers(List.of("001", "001"))
                 .build();
 
-        //when
         LocalDateTime registerDateTime = LocalDateTime.now();
+
+        //when
         OrderResponse response = orderService.createOrder(request, registerDateTime);
 
         //then
