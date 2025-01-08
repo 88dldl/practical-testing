@@ -13,6 +13,7 @@ import sample.cafekiosk.spring.service.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.service.order.response.OrderResponse;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class OrderService {
                 .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 
         // 재고 차감 시도
-        for (String stockProductNumber : stockProductNumbers) {
+        for (String stockProductNumber : new HashSet<>(stockProductNumbers)) {
             Stock stock = stockMap.get(stockProductNumber);
             int quantity = productCountingMap.get(stockProductNumber).intValue();
 
