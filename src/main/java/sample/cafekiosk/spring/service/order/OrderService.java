@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import sample.cafekiosk.spring.domain.order.Order;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductType;
+import sample.cafekiosk.spring.domain.stock.Stock;
 import sample.cafekiosk.spring.repository.order.OrderRepository;
 import sample.cafekiosk.spring.repository.product.ProductRepository;
+import sample.cafekiosk.spring.repository.stock.StockRepository;
 import sample.cafekiosk.spring.service.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.service.order.response.OrderResponse;
 
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class OrderService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
+    private final StockRepository stockRepository;
 
     public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
@@ -30,6 +33,9 @@ public class OrderService {
                 .filter(product -> ProductType.containsStockType(product.getType()))
                 .map(Product::getProductNumber)
                 .toList();
+
+        // 재고 엔티티 조회
+        List<Stock> stocks = stockRepository.findAllByProductNumberIn(stockProductNumbers);
 
         Order order = Order.create(products, registeredDateTime);
         Order savedOrder = orderRepository.save(order);
