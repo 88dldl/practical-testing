@@ -1,5 +1,6 @@
 package sample.cafekiosk.spring.service.product;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ class ProductServiceTest {
     private ProductService productService;
     @Autowired
     private ProductRepository productRepository;
+
+    @AfterEach
+    void tearDown() {
+        productRepository.deleteAllInBatch();
+    }
 
     @DisplayName("신규 상품을 등록한다. 가장 최근 상품의 상품 번호에서 1증가 한 값이다.")
     @Test
