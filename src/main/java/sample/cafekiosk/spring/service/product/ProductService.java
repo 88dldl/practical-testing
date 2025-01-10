@@ -27,13 +27,10 @@ public class ProductService {
     public ProductResponse createProduct(ProductCreateRequest request) {
         String nextProductNumber = createNextProductNumber();
 
-        return ProductResponse.builder()
-                .productNumber(nextProductNumber)
-                .type(request.getType())
-                .sellingType(request.getSellingType())
-                .name(request.getName())
-                .price(request.getPrice())
-                .build();
+        Product product = request.toEntity(nextProductNumber);
+        productRepository.save(product);
+
+        return ProductResponse.of(product);
     }
 
     private String createNextProductNumber() {
