@@ -28,27 +28,10 @@ class ProductRepositoryTest {
     @Test
     void finalAllBySellingStatusIn() {
         //given
-        Product product1 = Product.builder()
-                .productNumber("001")
-                .type(HANDMADE)
-                .sellingType(SELLING)
-                .name("아메리카노")
-                .price(4000)
-                .build();
-        Product product2 = Product.builder()
-                .productNumber("002")
-                .type(HANDMADE)
-                .sellingType(HOLD)
-                .name("카페라떼")
-                .price(4500)
-                .build();
-        Product product3 = Product.builder()
-                .productNumber("003")
-                .type(HANDMADE)
-                .sellingType(STOP_SELLING)
-                .name("팥빙수")
-                .price(7000)
-                .build();
+        Product product1 = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
+        Product product2 = createProduct("002", HANDMADE, HOLD, "카페라떼", 4500);
+        Product product3 = createProduct("003", HANDMADE, STOP_SELLING, "팥빙수", 7000);
+
 
         productRepository.saveAll(List.of(product1, product2, product3));
 
@@ -68,27 +51,10 @@ class ProductRepositoryTest {
     @Test
     void findAllByProductNumberIn() {
         //given
-        Product product1 = Product.builder()
-                .productNumber("001")
-                .type(HANDMADE)
-                .sellingType(SELLING)
-                .name("아메리카노")
-                .price(4000)
-                .build();
-        Product product2 = Product.builder()
-                .productNumber("002")
-                .type(HANDMADE)
-                .sellingType(HOLD)
-                .name("카페라떼")
-                .price(4500)
-                .build();
-        Product product3 = Product.builder()
-                .productNumber("003")
-                .type(HANDMADE)
-                .sellingType(STOP_SELLING)
-                .name("팥빙수")
-                .price(7000)
-                .build();
+        Product product1 = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
+        Product product2 = createProduct("002", HANDMADE, HOLD, "카페라떼", 4500);
+        Product product3 = createProduct("003", HANDMADE, STOP_SELLING, "팥빙수", 7000);
+
 
         productRepository.saveAll(List.of(product1, product2, product3));
 
