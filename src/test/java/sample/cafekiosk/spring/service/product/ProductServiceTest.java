@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import sample.cafekiosk.spring.controller.product.dto.request.ProductCreateRequest;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductSellingType;
@@ -18,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static sample.cafekiosk.spring.domain.product.ProductSellingType.SELLING;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
+@ActiveProfiles("test")
 @SpringBootTest
 class ProductServiceTest {
     @Autowired
