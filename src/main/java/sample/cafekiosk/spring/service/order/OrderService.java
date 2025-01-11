@@ -10,7 +10,7 @@ import sample.cafekiosk.spring.domain.stock.Stock;
 import sample.cafekiosk.spring.repository.order.OrderRepository;
 import sample.cafekiosk.spring.repository.product.ProductRepository;
 import sample.cafekiosk.spring.repository.stock.StockRepository;
-import sample.cafekiosk.spring.service.order.request.OrderCreateRequest;
+import sample.cafekiosk.spring.service.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.spring.service.order.response.OrderResponse;
 
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final StockRepository stockRepository;
 
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 

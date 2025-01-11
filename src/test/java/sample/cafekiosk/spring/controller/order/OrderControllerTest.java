@@ -8,8 +8,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import sample.cafekiosk.spring.controller.order.dto.request.OrderCreateRequest;
 import sample.cafekiosk.spring.service.order.OrderService;
-import sample.cafekiosk.spring.service.order.request.OrderCreateRequest;
 
 import java.util.List;
 

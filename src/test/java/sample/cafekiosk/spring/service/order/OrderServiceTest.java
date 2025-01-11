@@ -1,12 +1,12 @@
 package sample.cafekiosk.spring.service.order;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import sample.cafekiosk.spring.controller.order.dto.request.OrderCreateRequest;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductType;
 import sample.cafekiosk.spring.domain.stock.Stock;
@@ -14,7 +14,6 @@ import sample.cafekiosk.spring.repository.order.OrderRepository;
 import sample.cafekiosk.spring.repository.orderProduct.OrderProductRepository;
 import sample.cafekiosk.spring.repository.product.ProductRepository;
 import sample.cafekiosk.spring.repository.stock.StockRepository;
-import sample.cafekiosk.spring.service.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.service.order.response.OrderResponse;
 
 import java.time.LocalDateTime;
@@ -67,7 +66,7 @@ class OrderServiceTest {
         LocalDateTime registerDateTime = LocalDateTime.now();
 
         //when
-        OrderResponse response = orderService.createOrder(request, registerDateTime);
+        OrderResponse response = orderService.createOrder(request.toServiceRequest(), registerDateTime);
 
         //then
         // id는 얼마인지 중요하지 않고 있으면 된다,
@@ -102,7 +101,7 @@ class OrderServiceTest {
         LocalDateTime registerDateTime = LocalDateTime.now();
 
         //when
-        OrderResponse response = orderService.createOrder(request, registerDateTime);
+        OrderResponse response = orderService.createOrder(request.toServiceRequest(), registerDateTime);
 
         //then
         assertThat(response.getId()).isNotNull();
@@ -141,7 +140,7 @@ class OrderServiceTest {
         LocalDateTime registerDateTime = LocalDateTime.now();
 
         //when
-        OrderResponse response = orderService.createOrder(request, registerDateTime);
+        OrderResponse response = orderService.createOrder(request.toServiceRequest(), registerDateTime);
 
         //then
         assertThat(response.getId()).isNotNull();
@@ -187,7 +186,7 @@ class OrderServiceTest {
         LocalDateTime registerDateTime = LocalDateTime.now();
 
         //when //then
-        assertThatThrownBy(() -> orderService.createOrder(request, registerDateTime))
+        assertThatThrownBy(() -> orderService.createOrder(request.toServiceRequest(), registerDateTime))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("재고가 부족한 상품이 있습니다.");
     }
