@@ -9,8 +9,8 @@ import sample.cafekiosk.spring.repository.history.mail.MailSendHistoryRepository
 @RequiredArgsConstructor
 @Service
 public class MailService {
-    private MailSendClient mailSendClient;
-    private MailSendHistoryRepository mailSendHistoryRepository;
+    private final MailSendClient mailSendClient;
+    private final MailSendHistoryRepository mailSendHistoryRepository;
 
     public boolean sendMail(String fromEmail, String toEmail, String subject, String content) {
         boolean result = mailSendClient.sendEmail(fromEmail, toEmail, subject, content);

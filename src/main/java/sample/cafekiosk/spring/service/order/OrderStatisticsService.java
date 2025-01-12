@@ -14,8 +14,8 @@ import static sample.cafekiosk.spring.domain.order.OrderStatus.PAYMENT_COMPLETED
 @RequiredArgsConstructor
 @Service
 public class OrderStatisticsService {
-    private OrderRepository orderRepository;
-    private MailService mailService;
+    private final OrderRepository orderRepository;
+    private final MailService mailService;
 
     public void sendOrderStatisticsMail(LocalDate orderDate, String email) {
         // 해당 일자에 결제 완료된 주문들을 가져와서
