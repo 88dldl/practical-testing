@@ -1,10 +1,10 @@
 package sample.cafekiosk.spring.repository.order;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.domain.order.Order;
 import sample.cafekiosk.spring.domain.order.OrderStatus;
 
@@ -16,9 +16,8 @@ import static org.assertj.core.api.Assertions.tuple;
 import static sample.cafekiosk.spring.domain.order.OrderStatus.CANCELED;
 import static sample.cafekiosk.spring.domain.order.OrderStatus.PAYMENT_COMPLETED;
 
-@ActiveProfiles("test")
-@DataJpaTest
-class OrderRepositoryTest {
+@Transactional
+class OrderRepositoryTest extends IntegrationTestSupport {
     @Autowired
     private OrderRepository orderRepository;
 
