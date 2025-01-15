@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.controller.order.dto.request.OrderCreateRequest;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductType;
@@ -27,10 +26,7 @@ import static sample.cafekiosk.spring.domain.product.ProductType.BAKERY;
 import static sample.cafekiosk.spring.domain.product.ProductType.BOTTLE;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-//@Transactional
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
