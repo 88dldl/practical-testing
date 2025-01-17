@@ -2,10 +2,10 @@ package sample.cafekiosk.spring.service.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import sample.cafekiosk.spring.controller.product.dto.request.ProductCreateRequest;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductSellingType;
 import sample.cafekiosk.spring.repository.product.ProductRepository;
+import sample.cafekiosk.spring.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.spring.service.product.response.ProductResponse;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = productNumberFactory.createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);

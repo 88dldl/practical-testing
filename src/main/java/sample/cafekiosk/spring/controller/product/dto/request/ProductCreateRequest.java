@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import sample.cafekiosk.spring.domain.product.Product;
 import sample.cafekiosk.spring.domain.product.ProductSellingType;
 import sample.cafekiosk.spring.domain.product.ProductType;
+import sample.cafekiosk.spring.service.product.request.ProductCreateServiceRequest;
 
 @Getter
 @NoArgsConstructor
@@ -36,6 +37,15 @@ public class ProductCreateRequest {
     public Product toEntity(String nextProductNumber) {
         return Product.builder()
                 .productNumber(nextProductNumber)
+                .type(type)
+                .sellingType(sellingType)
+                .name(name)
+                .price(price)
+                .build();
+    }
+
+    public ProductCreateServiceRequest toServiceRequest() {
+        return ProductCreateServiceRequest.builder()
                 .type(type)
                 .sellingType(sellingType)
                 .name(name)
